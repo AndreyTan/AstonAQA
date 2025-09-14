@@ -28,7 +28,7 @@ public class TestMegaMath {
     public void computeTwoNumbersTest() {
         assertThrows(ArithmeticException.class, () -> megaMath.computeTwoNumbers(1, 0, MegaMathArithmeticActions.divide));
         assertThrows(ArithmeticException.class, () -> megaMath.computeTwoNumbers(1, 1, null));
-        assertEquals(megaMath.computeTwoNumbers(10, 11, MegaMathArithmeticActions.add), 21, "10+11 должно было получиться 21");
+        assertEquals(megaMath.computeTwoNumbers(11, 12, MegaMathArithmeticActions.add), 23, "11+12 должно было получиться 23");
         assertEquals(megaMath.computeTwoNumbers(5, 7, MegaMathArithmeticActions.subtract), -2, "5-7 должно было получиться -2");
         assertEquals(megaMath.computeTwoNumbers(11, 12, MegaMathArithmeticActions.multiply), 132, "11*12 должно было получиться 132");
         assertEquals(megaMath.computeTwoNumbers(90, 3, MegaMathArithmeticActions.divide), 30, "90/3 должно было получиться 30");
