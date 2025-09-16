@@ -75,12 +75,12 @@ public class EchoTest {
                 .header("Content-Type","text/plain")
                 .contentType(ContentType.TEXT)
                 .accept(ContentType.ANY)
-                .body("any raw text")
+                .body("any put text")
                 .when()
                 .put("/put")
                 .then()
                 .statusCode(200)
-                .body("data",equalTo("any raw text"));
+                .body("data",equalTo("any put text"));
     }
 
     @Test
