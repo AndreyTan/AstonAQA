@@ -14,7 +14,6 @@ public class InitTests {
     }
 
     public static void initSetUpTests() {
-        System.out.println("Онлайн пополнение\nбез комиссии".matches("Онлайн пополнение.*без комиссии"));
         WebDriverManager.chromedriver().setup();
         _driver = new ChromeDriver();
         _driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
