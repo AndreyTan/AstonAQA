@@ -24,7 +24,7 @@ public class MainTests {
         assertAll(
                 ()->assertTrue(Main.checkNumNegSing(-1)),
                 ()->assertFalse(Main.checkNumNegSing(0)),
-                ()->assertFalse(Main.checkNumNegSing(13430))
+                ()->assertFalse(Main.checkNumNegSing(13431))
         );
     }
 
