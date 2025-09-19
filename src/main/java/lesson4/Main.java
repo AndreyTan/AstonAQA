@@ -45,7 +45,7 @@ public class Main {
         System.out.println("\nЗадание 2 -------------------------\n");
         Circle cirle = new Circle(2,"Red","White");
         Rectangle rect = new Rectangle(10,15,"Blue","Green");
-        Triangle triangle = new Triangle(3,5,7,"White","Black");
+        Triangle triangle = new Triangle(3,5,7,"White","Orange");
 
         cirle.showInfo();
         rect.showInfo();
