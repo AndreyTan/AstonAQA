@@ -1,6 +1,7 @@
 package lesson3;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Product {
     private String _title;
@@ -10,10 +11,10 @@ public class Product {
     private boolean _isBooking;
 
     public Product(String title, LocalDate date, String country, int price, boolean isBooking){
-        this._title = title;
-        this._productionDate = date;
-        this._countryOrigin = country;
-        this._price = (price < 0)?price * -1:price;
+        this._title = Objects.requireNonNullElse(title,"default product");
+        this._productionDate = Objects.requireNonNullElse(date,LocalDate.now());
+        this._countryOrigin = Objects.requireNonNullElse(country,"Russia");
+        this._price = (price < 0)?-price:price;
         this._isBooking = isBooking;
     }
 
@@ -24,4 +25,25 @@ public class Product {
         System.out.println("price: " + _price);
         System.out.println("booking: " + _isBooking);
     }
+
+    public String getTitle(){
+        return _title;
+    }
+
+    public LocalDate getProductionDate(){
+        return _productionDate;
+    }
+
+    public String getCountryOrigin(){
+        return _countryOrigin;
+    }
+
+    public int getPrice(){
+        return _price;
+    }
+
+    public boolean getBookingStatus(){
+        return _isBooking;
+    }
+
 }

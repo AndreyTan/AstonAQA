@@ -2,6 +2,8 @@ package lesson3;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.Objects;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,6 +25,7 @@ public class Main {
         funnyPark.buildNewAttraction("Yayoo","Awesome fun time",100, LocalTime.of(9,30),LocalTime.of(17,0));
 
         funnyPark.introducePark();
+
     }
 
 }
