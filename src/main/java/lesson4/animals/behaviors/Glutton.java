@@ -10,8 +10,12 @@ public class Glutton implements IEatBehavior {
 
     public Glutton(int maxHunger, int harmfulness){
         this._hunger = 0;
-        this._maxHunger = maxHunger;
-        this._harmfulness = harmfulness;
+        this._maxHunger = Math.abs(maxHunger) == 0 ? 100 : Math.abs(maxHunger);
+        this._harmfulness = Math.abs(harmfulness);
+
+        if(_harmfulness > _maxHunger){
+            _harmfulness = _maxHunger;
+        }
     }
 
     @Override

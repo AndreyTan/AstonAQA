@@ -17,4 +17,8 @@ public class Cat extends Animal{
             return _nameActor;
         return "Кот";
     }
+
+    public static int getCountCats(){
+        return _countCats;
+    }
 }

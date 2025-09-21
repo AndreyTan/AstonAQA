@@ -1,7 +1,7 @@
 package lesson4.animals;
 
-
 import lesson4.animals.behaviors.*;
+import java.util.Objects;
 
 public abstract class Animal {
     private static int _countAnimals = 0;
@@ -12,17 +12,10 @@ public abstract class Animal {
 
     public Animal(String titleActor, IEatBehavior eatBehavior, IRunBehavior runBehavior, ISwimBehavior swimBehavior){
         Animal._countAnimals++;
-        this._nameActor = titleActor;
-        this._eatBehavior = eatBehavior;
-        this._runBehavior = runBehavior;
-        this._swimBehavior = swimBehavior;
-
-        if(eatBehavior == null)
-            this._eatBehavior = new Anorexia();
-        if(swimBehavior == null)
-            this._swimBehavior = new NonSwimmer();
-        if(runBehavior == null)
-            this._runBehavior = new Runner(100);
+        this._nameActor = Objects.requireNonNullElse(titleActor,"unknown animal");
+        this._eatBehavior = Objects.requireNonNullElse(eatBehavior,new Anorexia());
+        this._runBehavior = Objects.requireNonNullElse(runBehavior,new Runner(100));
+        this._swimBehavior =  Objects.requireNonNullElse(swimBehavior,new NonSwimmer());
     }
 
     public void run(int distance){
@@ -45,4 +38,6 @@ public abstract class Animal {
     public static int getCountAnimals(){
         return _countAnimals;
     }
+
+
 }

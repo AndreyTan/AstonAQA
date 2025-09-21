@@ -1,6 +1,5 @@
 package lesson4.animals;
 
-
 import lesson4.animals.behaviors.*;
 
 public class Dog extends Animal{
@@ -17,4 +16,9 @@ public class Dog extends Animal{
             return _nameActor;
         return "Собака";
     }
+
+    public static int getCountDogs(){
+        return _countDogs;
+    }
+
 }

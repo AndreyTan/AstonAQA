@@ -41,6 +41,10 @@ public class Main {
             }
         }
 
+        System.out.println("---------------------------------");
+        System.out.println("Всего создано животных: " + Animal.getCountAnimals());
+        System.out.println("Всего создано котов: " + Cat.getCountCats());
+        System.out.println("Всего создано собак: " + Dog.getCountDogs());
         /*-------------------------------*/
         System.out.println("\nЗадание 2 -------------------------\n");
         Circle cirle = new Circle(2,"Red","White");
