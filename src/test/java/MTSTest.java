@@ -3,7 +3,7 @@ import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
-import  static  org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,9 +21,9 @@ public class MTSTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get("https://mts.by/");
-        try{
+        try {
             driver.findElement(By.xpath("//button[@class=\"btn btn_gray cookie__cancel\"]")).click();
-        } catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex);
         }
     }
@@ -38,20 +38,23 @@ public class MTSTest {
     void testPayWrapper() {
 
         String h2PayWrapper = driver.findElement(By.xpath("//div[@class=\"pay__wrapper\"]/h2")).getText();
-        System.out.println(h2PayWrapper);
+        h2PayWrapper = h2PayWrapper.replace('\n',' ');
+
+        assertTrue(h2PayWrapper.matches(".*Онлайн пополнение без комиссии.*"));
     }
 
     @Test
     @DisplayName("проверяем наличие логотипов")
-    public void testLogos(){
+    public void testLogos() {
 
         List<WebElement> elems = driver.findElements(By.xpath("//div[@class=\"pay__partners\"]//li/img"));
 
-        assertEquals(5,elems.size());
+        assertEquals(5, elems.size());
     }
+
     @Test
     @DisplayName("проверяем работоспособность ссылки")
-    public void testLink(){
+    public void testLink() {
 
         baseURI = "https://www.mts.by/";
 
@@ -66,7 +69,7 @@ public class MTSTest {
 
     @Test
     @DisplayName("тестируем кнопку продолжить")
-    public void testForm(){
+    public void testForm() {
 
         WebElement inputPhone = driver.findElement(By.xpath("//form[@id=\"pay-connection\"]//input[@id=\"connection-phone\"]"));
         WebElement inputSum = driver.findElement(By.xpath("//form[@id=\"pay-connection\"]//input[@id=\"connection-sum\"]"));
