@@ -14,12 +14,12 @@ import java.util.Map;
 public class EchoTest {
 
     @BeforeEach
-    public void testInit(){
+    public void testInit() {
         baseURI = "https://postman-echo.com";
     }
 
     @Test
-    public void testFirstGet(){
+    public void testFirstGet() {
         /*
         Response response = get("https://postman-echo.com/get?foo1=bar1&foo2=bar2");
         System.out.println(response.getStatusCode());
@@ -27,16 +27,16 @@ public class EchoTest {
 
         given()
                 .get("/get?foo1=bar1&foo2=bar2").then().statusCode(200)
-                .body("args.foo1",equalTo("bar1"))
+                .body("args.foo1", equalTo("bar1"))
                 .and()
-                .body("args.foo2",equalTo("bar2"));
+                .body("args.foo2", equalTo("bar2"));
     }
 
     @Test
     public void testPostRawText() {
         String reqDataBody = "sdfsfsfa";
         given()
-                .header("Content-Type","text/plain")
+                .header("Content-Type", "text/plain")
                 .contentType(ContentType.TEXT)
                 .accept(ContentType.ANY)
                 .body(reqDataBody)
@@ -44,19 +44,19 @@ public class EchoTest {
                 .post("/post")
                 .then()
                 .statusCode(200)
-                .body("data",equalTo(reqDataBody));
+                .body("data", equalTo(reqDataBody));
 
     }
 
     @Test
-    public void testPostForm(){
+    public void testPostForm() {
         JSONObject bodyJson = new JSONObject();
-        bodyJson.put("yolo","yo1");
-        bodyJson.put("bolo","bobo");
+        bodyJson.put("yolo", "yo1");
+        bodyJson.put("bolo", "bobo");
 
 
         given()
-                .header("Content-Type","application/x-www-form-urlencoded")
+                .header("Content-Type", "application/x-www-form-urlencoded")
                 //.header("Content-Type",ContentType.URLENC)
                 .contentType(ContentType.URLENC)
                 .accept(ContentType.ANY)
@@ -65,14 +65,14 @@ public class EchoTest {
                 .post("/post")
                 .then()
                 .statusCode(200)
-                .body("form.yolo",equalTo("yo1")).and()
-                .body("form.bolo",equalTo("bobo"));
+                .body("form.yolo", equalTo("yo1")).and()
+                .body("form.bolo", equalTo("bobo"));
     }
 
     @Test
-    public void testPut(){
+    public void testPut() {
         given()
-                .header("Content-Type","text/plain")
+                .header("Content-Type", "text/plain")
                 .contentType(ContentType.TEXT)
                 .accept(ContentType.ANY)
                 .body("any put text")
@@ -80,13 +80,13 @@ public class EchoTest {
                 .put("/put")
                 .then()
                 .statusCode(200)
-                .body("data",equalTo("any put text"));
+                .body("data", equalTo("any put text"));
     }
 
     @Test
-    public void testPatch(){
+    public void testPatch() {
         given()
-                .header("Content-Type","text/plain")
+                .header("Content-Type", "text/plain")
                 .contentType(ContentType.TEXT)
                 .accept(ContentType.ANY)
                 .body("any raw patch text")
@@ -94,13 +94,13 @@ public class EchoTest {
                 .patch("/patch")
                 .then()
                 .statusCode(200)
-                .body("data",equalTo("any raw patch text"));
+                .body("data", equalTo("any raw patch text"));
     }
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
         given()
-                .header("Content-Type","text/plain")
+                .header("Content-Type", "text/plain")
                 .contentType(ContentType.TEXT)
                 .accept(ContentType.ANY)
                 .body("delete text")
@@ -108,7 +108,7 @@ public class EchoTest {
                 .delete("/delete")
                 .then()
                 .statusCode(200)
-                .body("data",equalTo("delete text"));
+                .body("data", equalTo("delete text"));
     }
 
 }
