@@ -15,7 +15,7 @@ public class PhoneServiceTests {
     private static String _sum;
 
     @BeforeAll
-    public static void setUpSuite(){
+    public static void setUpSuite() {
         InitTests.initSetUpTests();
         _page = new PayPhonePage(InitTests.getDriver());
         _phone = "297777777";
@@ -30,30 +30,30 @@ public class PhoneServiceTests {
 
     @Test
     @DisplayName("проверяем телефон")
-    public void testPhone(){
-        assertTrue(_page.checkPhoneNumber(_phone),"телефон должен отображаться правильно");
+    public void testPhone() {
+        assertTrue(_page.checkPhoneNumber(_phone), "телефон должен отображаться правильно");
     }
 
     @Test
     @DisplayName("проверяем сумму в заголовке и кнопке")
-    public void testSum(){
-        assertTrue(_page.checkSum(Integer.parseInt(_sum)),"сумма должна отображаться правильно");
+    public void testSum() {
+        assertTrue(_page.checkSum(Integer.parseInt(_sum)), "сумма должна отображаться правильно");
     }
 
     @Test
     @DisplayName("проверяем плейсхолдеры")
-    public void testPhd(){
-        assertTrue(_page.checkPlaceholders(),"плейсхолдеры неправильные");
+    public void testPhd() {
+        assertTrue(_page.checkPlaceholders(), "плейсхолдеры неправильные");
     }
 
     @Test
     @DisplayName("проверяем иконки")
-    public void testIcons(){
-        assertEquals(4,_page.checkIcons());
+    public void testIcons() {
+        assertEquals(4, _page.checkIcons());
     }
 
     @AfterAll
-    public static void finishTest(){
+    public static void finishTest() {
         InitTests.getDriver().switchTo().defaultContent();
         InitTests.getDriver().quit();
     }

@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ServicesTest {
 
     @BeforeAll
-    public static void setUpSuite(){
+    public static void setUpSuite() {
         InitTests.initSetUpTests();
     }
 
     @Test
     @DisplayName("плейсхолдеры услуг связи")
-    public void testPlaceholdersPayPhoneService(){
+    public void testPlaceholdersPayPhoneService() {
         PayPhonePage page = new PayPhonePage(InitTests.getDriver());
         page.openPage();
         assertTrue(page.checkPlaceholders("Номер телефона", "Сумма", "E-mail для отправки чека"));
@@ -24,7 +24,7 @@ public class ServicesTest {
 
     @Test
     @DisplayName("плейсхолдеры домашнего интернета")
-    public void testPlaceholdersPayInternetService(){
+    public void testPlaceholdersPayInternetService() {
         PayInternetPage page = new PayInternetPage(InitTests.getDriver());
         page.openPage();
         assertTrue(page.checkPlaceholders("Номер абонента", "Сумма", "E-mail для отправки чека"));
@@ -32,7 +32,7 @@ public class ServicesTest {
 
     @Test
     @DisplayName("плейсхолдеры рассрочки")
-    public void testPlaceholdersPayInstalmentService(){
+    public void testPlaceholdersPayInstalmentService() {
         PayInstalmentPage page = new PayInstalmentPage(InitTests.getDriver());
         page.openPage();
         assertTrue(page.checkPlaceholders("Номер счета на 44", "Сумма", "E-mail для отправки чека"));
@@ -40,17 +40,15 @@ public class ServicesTest {
 
     @Test
     @DisplayName("плейсхолдеры задолженности")
-    public void testPlaceholdersPayArrearsService(){
+    public void testPlaceholdersPayArrearsService() {
         PayArrearsPage page = new PayArrearsPage(InitTests.getDriver());
         page.openPage();
         assertTrue(page.checkPlaceholders("Номер счета на 2073", "Сумма", "E-mail для отправки чека"));
     }
 
 
-
-
     @AfterAll
-    public static void finishTest(){
+    public static void finishTest() {
         InitTests.getDriver().quit();
     }
 

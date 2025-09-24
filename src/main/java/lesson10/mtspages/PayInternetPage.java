@@ -8,34 +8,34 @@ public class PayInternetPage extends PagePayServices {
 
 
     public PayInternetPage(WebDriver driver) {
-        super(driver,"Домашний интернет");
+        super(driver, "Домашний интернет");
     }
 
-    private WebElement getInputInternetPhone(){
+    private WebElement getInputInternetPhone() {
         return this._driver.findElement(By.xpath("//form[@id=\"pay-internet\"]//input[@id=\"internet-phone\"]"));
     }
 
-    private WebElement getInputInternetSum(){
+    private WebElement getInputInternetSum() {
         return this._driver.findElement(By.xpath("//form[@id=\"pay-internet\"]//input[@id=\"internet-sum\"]"));
     }
 
-    private WebElement getInputInternetEmail(){
+    private WebElement getInputInternetEmail() {
         return this._driver.findElement(By.xpath("//form[@id=\"pay-internet\"]//input[@id=\"internet-email\"]"));
     }
 
-    public void enterInternetPhone(String phone){
-        enterToInputElement(getInputInternetPhone(),phone);
+    public void enterInternetPhone(String phone) {
+        enterToInputElement(getInputInternetPhone(), phone);
     }
 
-    public void enterSum(String sum){
-        enterToInputElement(getInputInternetSum(),sum);
+    public void enterSum(String sum) {
+        enterToInputElement(getInputInternetSum(), sum);
     }
 
-    public void enterEmail(String email){
-        enterToInputElement(getInputInternetEmail(),email);
+    public void enterEmail(String email) {
+        enterToInputElement(getInputInternetEmail(), email);
     }
 
-    public boolean checkPlaceholders(String phone,String sum, String email){
+    public boolean checkPlaceholders(String phone, String sum, String email) {
         return phone.equals(getInputInternetPhone().getAttribute("placeholder")) &&
                 sum.equals(getInputInternetSum().getAttribute("placeholder")) &&
                 email.equals(getInputInternetEmail().getAttribute("placeholder"));

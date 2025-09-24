@@ -2,13 +2,14 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
 import java.time.Duration;
 
 public class InitTests {
     private static WebDriver _driver;
 
-    public static WebDriver getDriver(){
-        if(_driver == null)
+    public static WebDriver getDriver() {
+        if (_driver == null)
             return new ChromeDriver();
         return _driver;
     }
@@ -20,11 +21,11 @@ public class InitTests {
         openMTS();
     }
 
-    public static void openMTS(){
+    public static void openMTS() {
         _driver.get("https://mts.by/");
-        try{
+        try {
             _driver.findElement(By.xpath("//button[@class=\"btn btn_gray cookie__cancel\"]")).click();
-        } catch (Exception ex){
+        } catch (Exception ex) {
             //System.out.println(ex);
         }
     }
