@@ -38,7 +38,7 @@ public class MTSTest {
     void testPayWrapper() {
 
         String h2PayWrapper = driver.findElement(By.xpath("//div[@class=\"pay__wrapper\"]/h2")).getText();
-        h2PayWrapper = h2PayWrapper.replace('\n',' ');
+        h2PayWrapper = h2PayWrapper.replace('\n', ' ');
 
         assertTrue(h2PayWrapper.matches(".*Онлайн пополнение без комиссии.*"));
     }
