@@ -1,37 +1,42 @@
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import static org.testng.Assert.*;
 
 public class TestMegaMath {
     private MegaMath megaMath;
 
     @BeforeMethod
-    public void beginInit(){
+    public void beginInit() {
         megaMath = new MegaMath();
     }
 
     @Test
-    public void compareWholesTest(){
-        assertTrue(megaMath.compareWholes(100, 20), "первое число должно быть больше второго");
-        assertFalse(megaMath.compareWholes(2, 3), "третье число должно быть больше первого");
+    public void compareWholesTest() {
+        assertEquals(1, megaMath.compareWholes(BigInteger.valueOf(10), BigInteger.valueOf(2)), "первое число должно быть больше второго");
+        assertEquals(0, megaMath.compareWholes(BigInteger.valueOf(30), BigInteger.valueOf(30)), "числа должны быть равны");
+        assertEquals(-1, megaMath.compareWholes(BigInteger.valueOf(50), BigInteger.valueOf(100)), "второе число должно быть больше первого");
     }
 
     @Test
     public void computeFactorialTest() {
         assertThrows(ArithmeticException.class, () -> megaMath.computeFactorial(-1));
-        assertEquals(megaMath.computeFactorial(0), 1, "метод должен вернуть 1 при параметре 0");
-        assertEquals(megaMath.computeFactorial(5), 120, "метод должен был вернуть 120 при параметре 5");
+        assertEquals(BigInteger.valueOf(1), megaMath.computeFactorial(0), "метод должен вернуть 1 при параметре 0");
+        assertEquals(BigInteger.valueOf(120), megaMath.computeFactorial(5), "метод должен был вернуть 120 при параметре 5");
     }
 
     @Test
     public void computeTwoNumbersTest() {
-        assertThrows(ArithmeticException.class, () -> megaMath.computeTwoNumbers(1, 0, MegaMathArithmeticActions.divide));
-        assertThrows(ArithmeticException.class, () -> megaMath.computeTwoNumbers(1, 1, null));
-        assertEquals(megaMath.computeTwoNumbers(11, 12, MegaMathArithmeticActions.add), 23, "11+12 должно было получиться 23");
-        assertEquals(megaMath.computeTwoNumbers(5, 7, MegaMathArithmeticActions.subtract), -2, "5-7 должно было получиться -2");
-        assertEquals(megaMath.computeTwoNumbers(11, 12, MegaMathArithmeticActions.multiply), 132, "11*12 должно было получиться 132");
-        assertEquals(megaMath.computeTwoNumbers(90, 3, MegaMathArithmeticActions.divide), 30, "90/3 должно было получиться 30");
+        assertEquals(BigDecimal.valueOf(21), megaMath.computeTwoNumbers(BigDecimal.valueOf(10), (BigDecimal.valueOf(11)), MegaMathArithmeticActions.add), "10+11 должно было получиться 21");
+        assertEquals(BigDecimal.valueOf(-2), megaMath.computeTwoNumbers(BigDecimal.valueOf(5), BigDecimal.valueOf(7), MegaMathArithmeticActions.subtract), "5-7 должно было получиться -2");
+        assertEquals(BigDecimal.valueOf(132), megaMath.computeTwoNumbers(BigDecimal.valueOf(11), BigDecimal.valueOf(12), MegaMathArithmeticActions.multiply), "11*12 должно было получиться 132");
+        assertEquals(BigDecimal.valueOf(30), megaMath.computeTwoNumbers(BigDecimal.valueOf(90), BigDecimal.valueOf(3), MegaMathArithmeticActions.divide), "90/3 должно было получиться 30");
+        assertThrows("метод должен вернуть ArithmeticException при делении на ноль", ArithmeticException.class, () -> megaMath.computeTwoNumbers(BigDecimal.valueOf(1), BigDecimal.valueOf(0), MegaMathArithmeticActions.divide));
+        assertThrows("метод должен вернуть ArithmeticException если третий аргумент null", ArithmeticException.class, () -> megaMath.computeTwoNumbers(BigDecimal.valueOf(1), BigDecimal.valueOf(1), null));
+
     }
 
     @Test
