@@ -1,48 +1,51 @@
 package lesson7;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 public class MegaMath {
 
-    public boolean compareWholes(int a, int b){
-        return a > b;
+    public int compareWholes(BigInteger a, BigInteger b) {
+        return a.compareTo(b);
     }
 
-    public long computeFactorial(int num) throws ArithmeticException{
-        if(num == 0) return 1;
-        if(num < 0)
+    public BigInteger computeFactorial(int num) throws ArithmeticException {
+        if (num == 0) return BigInteger.valueOf(1);
+        if (num < 0)
             throw new ArithmeticException("The numbers should only be positive");
 
-        long sum = 1;
+        BigInteger sum = BigInteger.valueOf(1);
 
-        for(int i = 1; i <= num;i++){
-            sum *= i;
+        for (int i = 1; i <= num; i++) {
+            sum = sum.multiply(BigInteger.valueOf(i));
         }
         return sum;
     }
 
-    public double computeTwoNumbers(double f, double s, MegaMathArithmeticActions action) throws ArithmeticException{
-        if(action == null)
+    public BigDecimal computeTwoNumbers(BigDecimal f, BigDecimal s, MegaMathArithmeticActions action) throws ArithmeticException {
+        if (action == null)
             throw new ArithmeticException("некорректное действие");
-        switch (action){
-            case MegaMathArithmeticActions.add -> {
-                return f + s;
+        switch (action) {
+            case add -> {
+                return f.add(s);
             }
-            case MegaMathArithmeticActions.subtract -> {
-                return f - s;
+            case subtract -> {
+                return f.subtract(s);
             }
-            case MegaMathArithmeticActions.multiply -> {
-                return f * s;
+            case multiply -> {
+                return f.multiply(s);
             }
-            case MegaMathArithmeticActions.divide -> {
-                if(s == 0)
+            case divide -> {
+                if (s.equals(BigInteger.valueOf(0)))
                     throw new ArithmeticException("деление на ноль");
-                return f / s;
+                return f.divide(s);
             }
         }
-        return 0;
+        return new BigDecimal(0);
     }
 
-    public double computeTriangleArea(double side1,double side2,double side3) throws ArithmeticException{
-        if(side1 > 0 && side3 > 0 && side2 > 0 && side1 + side2 > side3 && side1 + side3 > side2 && side2 + side3 > side1){
+    public double computeTriangleArea(double side1, double side2, double side3) throws ArithmeticException {
+        if (side1 > 0 && side3 > 0 && side2 > 0 && side1 + side2 > side3 && side1 + side3 > side2 && side2 + side3 > side1) {
             double p = (side1 + side2 + side3) / 2;
             return Math.sqrt(p * (p - side1) * (p - side2) * (p - side3));
         } else {
