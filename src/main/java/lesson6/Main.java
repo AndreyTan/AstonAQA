@@ -1,17 +1,36 @@
 package lesson6;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+import java.util.Set;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Academia academia = new Academia(25);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        printStudents(academia.getStudents(), 1);
+        academia.expellingStudents(3);
+
+        academia.transferToNewCourse(3);
+        printStudents(academia.getStudents(), 2);
+
+        /*-----------------------*/
+
+        TelephoneDirectory td = new TelephoneDirectory();
+        td.get("Miller");
+        td.add("3751537685975", "Peterson");
+        td.add("3754234156789", "Morris");
+        td.add("3751274589643", "Peterson");
+        td.get("Morris");
+        td.get("Peterson");
     }
+
+    public static void printStudents(Set<Student> students, int course) {
+        System.out.println("\nСтуденты, обучающиеся на " + course + " курсе:");
+        for (Student student : students) {
+            if (student.getCourse() == course)
+                System.out.println(student.getName());
+        }
+        System.out.println("----------------------");
+    }
+
 }
