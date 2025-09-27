@@ -33,7 +33,7 @@ public class Main {
         dog.eat(flat.getFood(), 10);
         cat.eat(flat.getFood(), 30);
         flat.addFood(catFoodPremium);
-
+        dog.eat(flat.getFood(), 100);
         cat.run(200);
         dog.run(500);
         cat.swim(10);
