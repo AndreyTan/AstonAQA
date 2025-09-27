@@ -1,28 +1,27 @@
 package lesson4;
 
 import lesson4.animals.*;
-import lesson4.animals.behaviors.*;
+import lesson4.animals.organism.*;
 import lesson4.geometry.*;
 
 public class Main {
     public static void main(String[] args) {
-        Cat cat = new Cat("Дикси", new Glutton(50, 15), new Runner(200), new NonSwimmer());
-        Cat[] cats = new Cat[3];
+        CatFactory catFactory = new CatFactory();
+        DogFactory dogFactory = new DogFactory();
+
+        Animal cat = catFactory.createAnimal("Дикси");
+
+        Animal[] cats = new Cat[3];
+
 
         for (int i = 0; i < cats.length; i++) {
-            cats[i] = new Cat("Кот " + (i + 1), new Glutton(25 + i * 10, 5 + 5 * i), new Runner(200), new NonSwimmer());
+            cats[i] = catFactory.createRandomAnimal("Кот " + (i + 1));
         }
 
-        Dog dog = new Dog("Джек", new Anorexia(), new Runner(500), new Swimmer(10));
-        Food catfood = new Food(80);
-        Food catFoodPremium = new Food(100);
+        Animal dog = dogFactory.createAnimal("Джек");
+        Food catfood = new Food(110);
+        Food catFoodPremium = new Food(1000);
         Dish flat = new Dish();
-
-        cat.run(200);
-        dog.run(500);
-
-        cat.swim(10);
-        dog.swim(10);
 
         cat.eat(flat.getFood(), 15);
         cat.eat(flat.getFood(), 25);
@@ -35,8 +34,13 @@ public class Main {
         cat.eat(flat.getFood(), 30);
         flat.addFood(catFoodPremium);
 
+        cat.run(200);
+        dog.run(500);
+        cat.swim(10);
+        dog.swim(10);
+
         for (int i = 0; i < 3; i++) {
-            for (Cat cit : cats) {
+            for (Animal cit : cats) {
                 cit.eat(flat.getFood(), 15);
             }
         }

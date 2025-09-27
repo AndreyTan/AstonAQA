@@ -1,12 +1,12 @@
 package lesson4.animals;
 
-import lesson4.animals.behaviors.*;
+import lesson4.animals.organism.*;
 
 public class Dog extends Animal {
     private static int _countDogs;
 
-    public Dog(String name, IEatBehavior eatBehavior, IRunBehavior runBehavior, ISwimBehavior swimBehavior) {
-        super(name, eatBehavior, runBehavior, swimBehavior);
+    public Dog(String name, IOrganismFactory organism) {
+        super(name, organism);
         _countDogs++;
     }
 
