@@ -18,7 +18,7 @@ public class NormalMusculoskeletalSystem implements IMusculoskeletalSystem, ISto
     public void tryToRun(int distance) {
         if (distance > 0) {
             if (_glycogen > 0) {
-                if (_glycogen <= distance * _spendGlycogenByRun) {
+                if (_glycogen >= distance * _spendGlycogenByRun) {
                     _glycogen -= distance * _spendGlycogenByRun;
                     System.out.printf("Бежим %d ед. дистанции,потратили %d энергии\n", distance, distance * _spendGlycogenByRun);
                 } else {
@@ -37,7 +37,7 @@ public class NormalMusculoskeletalSystem implements IMusculoskeletalSystem, ISto
     public void tryToSwim(int distance) {
         if (distance > 0) {
             if (_glycogen > 0) {
-                if (_glycogen <= distance * _spendGlycogenBySwim) {
+                if (_glycogen >= distance * _spendGlycogenBySwim) {
                     _glycogen -= distance * _spendGlycogenBySwim;
                     System.out.printf("Плывём %d ед. дистанции,потратили %d энергии\n", distance, distance * _spendGlycogenBySwim);
                 } else {
@@ -58,6 +58,7 @@ public class NormalMusculoskeletalSystem implements IMusculoskeletalSystem, ISto
             _glycogen += countNewGlucose / 2;
         else
             _glycogen = _maxGlycogen;
+        System.out.printf("Получили энергию,теперь энергии:[%d/%d]\n",_glycogen,_maxGlycogen);
     }
 
 }

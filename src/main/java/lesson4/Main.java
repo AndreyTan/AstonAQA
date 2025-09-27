@@ -34,11 +34,13 @@ public class Main {
         cat.eat(flat.getFood(), 30);
         flat.addFood(catFoodPremium);
         dog.eat(flat.getFood(), 100);
+        System.out.println("\n    бегаем...плаваем..  \n");
         cat.run(200);
         dog.run(500);
+        dog.eat(flat.getFood(), 100);
         cat.swim(10);
         dog.swim(10);
-
+        System.out.println("\n    кормим других котов...но вероятно не всех..  \n");
         for (int i = 0; i < 3; i++) {
             for (Animal cit : cats) {
                 cit.eat(flat.getFood(), 15);

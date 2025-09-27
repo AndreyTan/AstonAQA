@@ -10,7 +10,7 @@ public class DogOrganism implements IOrganismFactory {
 
     @Override
     public IMusculoskeletalSystem createMusculoskeletalSystem() {
-        return new NormalMusculoskeletalSystem(500, 1, 50);
+        return new NormalMusculoskeletalSystem(500, 1, 10);
     }
 
     @Override
