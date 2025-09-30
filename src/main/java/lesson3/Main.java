@@ -18,7 +18,7 @@ public class Main {
             product.printInfo();
             System.out.println("---------");
         }
-
+        System.out.println("\n             парки       \n");
         Park funnyPark = new Park("funny park");
         funnyPark.buildNewAttraction("Clowns", "A very fun attraction 100% safety", 50, LocalTime.of(9, 0), LocalTime.of(18, 0));
         funnyPark.buildNewAttraction("Booo", "Absolute non scary", 150, LocalTime.of(10, 0), LocalTime.of(23, 0));

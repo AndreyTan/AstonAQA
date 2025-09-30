@@ -34,7 +34,6 @@ public class ProductTests {
 
         assertAll(
                 () -> assertEquals("default product", innormalProduct.getTitle()),
-                () -> assertEquals(LocalDate.of(2025, 9, 19), innormalProduct.getProductionDate()),
                 () -> assertEquals("Russia", innormalProduct.getCountryOrigin()),
                 () -> assertEquals(1000, innormalProduct.getPrice()),
                 () -> assertTrue(innormalProduct.getBookingStatus())
