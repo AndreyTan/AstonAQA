@@ -53,7 +53,7 @@ public class Main {
 
     public static int calculateArray(String[][] matrix) throws MyArraySizeException, MyArrayDataException, ArrayIndexOutOfBoundsException {
         if (matrix.length != 4 || matrix[0].length != 4)
-            throw new MyArraySizeException("Недопустимый размер массива!");
+            throw new MyArraySizeException(matrix.length + " на " + matrix[0].length + " - недопустимый размер массива!");
         int sum = 0;
 
         for (int i = 0; i < matrix.length; i++) {
