@@ -1,49 +1,82 @@
 package lesson6;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Random;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.*;
 
 public class Academia {
-    private HashSet<Student> _students;
-    private String[] _groups;
+    private HashSet<Student> students = new HashSet<>(20);
+    private ArrayList<String> groups;
+    private DecimalFormat df;
 
-    public Academia(int countStud) {
-        Random rand = new Random();
-        _students = new HashSet<>(countStud);
-        _groups = new String[]{"math_1", "prog_1", "buss_1", "model_1"};
+    public Academia() {
+        df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
+        groups = new ArrayList<>(4);
+        addNewGroup("math group");
+        addNewGroup("model group");
+        addNewGroup("prog group");
+        addNewGroup("phys group");
+    }
 
+    public void createStudentsWithRandomPerformance(int countStud, int course, String group) {
         for (int i = 0; i < countStud; i++) {
-            int course = rand.nextInt(1, 3);
-            Student stud = new Student("Student " + (i + 1), _groups[rand.nextInt(0, _groups.length)] + course, course);
-            fillRandomAcademicPerformance(stud.getAcademInfo());
-            _students.add(stud);
+            addNewStudent("Student " + (i + 1), course, group);
         }
+    }
+
+    public void addNewGroup(String group) {
+        this.groups.add(group);
+    }
+
+    public String getTitleGroup(int i) throws IndexOutOfBoundsException {
+        if (i >= 0 && i < this.groups.size())
+            return this.groups.get(i);
+        else
+            throw new IndexOutOfBoundsException("Некорректный индекс");
+    }
+
+    public void addNewStudent(String name, int course, String group) {
+        Student stud = new Student(name, group, course);
+        fillRandomAcademicPerformance(stud.getAcademInfo());
+        this.students.add(stud);
     }
 
     public HashSet<Student> getStudents() {
-        return _students;
+        return this.students;
     }
 
-    public void expellingStudents(double transitionThreshold) {
-        HashSet<Student> verifiedStuds = new HashSet<>(_students.size());
+    public void expellingStudents() {
+        System.out.println("\n...Удаляем студентов...\n");
+        HashSet<Student> verifiedStuds = new HashSet<>(this.students.size());
         int countDeleted = 0;
-        for (Student student : _students) {
-            if (calculateAverageMark(student) >= transitionThreshold)
+
+        for (Student student : this.students) {
+            double avgMark = calculateAverageMark(student);
+            if (avgMark >= 3) {
+                System.out.printf("%s средняя оценка: %.2f\n", student.getName(), avgMark);
                 verifiedStuds.add(student);
-            else
+            } else {
                 countDeleted++;
+                System.out.printf("\tудаляем %s средняя оценка: %.2f\n", student.getName(), avgMark);
+            }
         }
 
-        _students = verifiedStuds;
-        System.out.printf("Удалённых студентов: %d, оставшихся: %d", countDeleted, _students.size());
+        this.students = verifiedStuds;
+        System.out.printf("Удалённых студентов: %d, оставшихся: %d\n", countDeleted, this.students.size());
     }
 
-    public void transferToNewCourse(double transferThreshold) {
-        for (Student student : _students) {
-            if (calculateAverageMark(student) >= transferThreshold)
+    public void transferToNewCourse() {
+        System.out.println("\n...переводим студентов на новый курс...\n");
+        for (Student student : this.students) {
+            double avgMark = calculateAverageMark(student);
+
+            if (avgMark >= 3) {
+                System.out.printf("%s средняя оценка: %.2f переводим\n", student.getName(), avgMark);
                 student.upCourse();
+            } else {
+                System.out.printf("\t%s средняя оценка: %.2f непереводим\n", student.getName(), avgMark);
+            }
         }
     }
 
@@ -98,7 +131,7 @@ public class Academia {
         if (countMarks == 0)
             return 0;
         else
-            return globalMark / countMarks;
+            return Double.parseDouble(df.format(globalMark / countMarks).replace(',','.'));
     }
 
 

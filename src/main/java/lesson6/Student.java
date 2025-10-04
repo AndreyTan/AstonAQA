@@ -3,32 +3,32 @@ package lesson6;
 import java.util.HashMap;
 
 public class Student {
-    private String _name;
-    private String _group;
-    private int _course;
-    private HashMap<CollegeSubjects, String> _academicPerformance;
+    private String name;
+    private String group;
+    private int course;
+    private HashMap<CollegeSubjects, String> academicPerformance;
 
     public Student(String name, String group, int course) {
-        this._name = name;
-        this._group = group;
-        this._course = course;
-        this._academicPerformance = Academia.getAcademicPerformance();
+        this.name = name;
+        this.group = group;
+        this.course = course;
+        this.academicPerformance = Academia.getAcademicPerformance();
     }
 
     public String getName() {
-        return _name;
+        return this.name;
     }
 
     public int getCourse() {
-        return _course;
+        return this.course;
     }
 
     public HashMap<CollegeSubjects, String> getAcademInfo() {
-        return _academicPerformance;
+        return this.academicPerformance;
     }
 
     public void upCourse() {
-        _course++;
+        this.course++;
     }
 
 

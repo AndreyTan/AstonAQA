@@ -5,16 +5,20 @@ import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        Academia academia = new Academia(25);
+        Academia academia = new Academia();
 
-        printStudents(academia.getStudents(), 1);
-        academia.expellingStudents(3);
+        academia.createStudentsWithRandomPerformance(15,1,academia.getTitleGroup(0));
+        academia.createStudentsWithRandomPerformance(17,3,academia.getTitleGroup(1));
+        academia.createStudentsWithRandomPerformance(16,2,academia.getTitleGroup(2));
 
-        academia.transferToNewCourse(3);
+        academia.transferToNewCourse();
+        academia.expellingStudents();
+
+
         printStudents(academia.getStudents(), 2);
 
         /*-----------------------*/
-
+        System.out.println("\n\tТелефонный справочник\t\n");
         TelephoneDirectory td = new TelephoneDirectory();
         td.get("Miller");
         td.add("3751537685975", "Peterson");
