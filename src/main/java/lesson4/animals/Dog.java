@@ -1,24 +1,31 @@
 package lesson4.animals;
 
-import lesson4.animals.organism.*;
-
 public class Dog extends Animal {
-    private static int _countDogs;
+    protected static int countDogs;
 
-    public Dog(String name, IOrganismFactory organism) {
-        super(name, organism);
-        _countDogs++;
+    public Dog(String name) {
+        super(name);
+        countDogs++;
     }
 
     @Override
-    public String getNameActor() {
-        if (!_nameActor.isBlank())
-            return _nameActor;
-        return "Собака";
+    public void run(int distance) {
+        if (distance > 0 && distance <= 500)
+            System.out.printf("%s бежит %d дистанции\n", name, distance);
+        else if (distance > 500)
+            System.out.printf("%s на такие дистанции не бегает\n", name);
     }
 
-    public static int getCountDogs() {
-        return _countDogs;
+    @Override
+    public void swim(int distance) {
+        if (distance > 0 && distance <= 10)
+            System.out.printf("%s плывёт на %d дистанцию\n", name, distance);
+        else if (distance > 10)
+            System.out.printf("%s на такие дистанции не плавает\n", name);
+    }
+
+    public static void printCountDogs() {
+        System.out.println("всего собак создано: " + countDogs);
     }
 
 }

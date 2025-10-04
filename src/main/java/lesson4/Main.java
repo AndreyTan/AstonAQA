@@ -1,65 +1,63 @@
 package lesson4;
 
-import lesson4.animals.*;
-import lesson4.animals.organism.*;
-import lesson4.geometry.*;
+
+import lesson4.animals.Animal;
+import lesson4.animals.Cat;
+import lesson4.animals.Dog;
+import lesson4.animals.FlatFood;
+import lesson4.geometry.Circle;
+import lesson4.geometry.Rectangle;
+import lesson4.geometry.Triangle;
 
 public class Main {
     public static void main(String[] args) {
-        CatFactory catFactory = new CatFactory();
-        DogFactory dogFactory = new DogFactory();
+        Cat cat1 = new Cat("Луна");
+        Dog dog1 = new Dog("Джек");
+        System.out.println("\n\tфизкультура\t\n");
+        cat1.run(200);
+        cat1.run(201);
+        cat1.swim(30);
 
-        Animal cat = catFactory.createAnimal("Дикси");
+        dog1.run(500);
+        dog1.run(501);
+        dog1.swim(10);
+        dog1.swim(20);
+        System.out.println("\n\tкормёжка\t\n");
 
-        Animal[] cats = new Cat[3];
+        FlatFood food = new FlatFood(0);
+        food.fill(6);
+        food.fill(2);
 
+        cat1.eatFood(food);
+
+        Cat[] cats = new Cat[5];
 
         for (int i = 0; i < cats.length; i++) {
-            cats[i] = catFactory.createRandomAnimal("Кот " + (i + 1));
+            cats[i] = new Cat("Кот " + i);
         }
 
-        Animal dog = dogFactory.createAnimal("Джек");
-        Food catfood = new Food(110);
-        Food catFoodPremium = new Food(1000);
-        Dish flat = new Dish();
-
-        cat.eat(flat.getFood(), 15);
-        cat.eat(flat.getFood(), 25);
-        flat.addFood(catfood);
-        cat.eat(flat.getFood(), 10);
-        cat.eat(flat.getFood(), 30);
-        cat.eat(flat.getFood(), 40);
-        cat.eat(flat.getFood(), 30);
-        dog.eat(flat.getFood(), 10);
-        cat.eat(flat.getFood(), 30);
-        flat.addFood(catFoodPremium);
-        dog.eat(flat.getFood(), 100);
-        System.out.println("\n    бегаем...плаваем..  \n");
-        cat.run(200);
-        dog.run(500);
-        dog.eat(flat.getFood(), 100);
-        cat.swim(10);
-        dog.swim(10);
-        System.out.println("\n    кормим других котов...но вероятно не всех..  \n");
-        for (int i = 0; i < 3; i++) {
-            for (Animal cit : cats) {
-                cit.eat(flat.getFood(), 15);
-            }
+        for (Cat cat : cats) {
+            cat.eatFood(food);
+        }
+        for (Cat cat : cats) {
+            cat.printHungryStatus();
         }
 
-        System.out.println("---------------------------------");
-        System.out.println("Всего создано животных: " + Animal.getCountAnimals());
-        System.out.println("Всего создано котов: " + Cat.getCountCats());
-        System.out.println("Всего создано собак: " + Dog.getCountDogs());
-        /*-------------------------------*/
-        System.out.println("\nЗадание 2 -------------------------\n");
-        Circle cirle = new Circle(2, "Red", "White");
+        System.out.println("\n\tитоги\t\n");
+        Animal.printCountAnimals();
+        Cat.printCountCats();
+        Dog.printCountDogs();
+
+        /*-----------------------------------------------------*/
+
+        System.out.println("\n\tФигуры\t\n");
+        Circle circle = new Circle(3, "Red", "White");
         Rectangle rect = new Rectangle(10, 15, "Blue", "Green");
         Triangle triangle = new Triangle(3, 5, 7, "White", "Orange");
 
-        cirle.showInfo();
-        rect.showInfo();
-        triangle.showInfo();
+        circle.printInfo();
+        rect.printInfo();
+        triangle.printInfo();
 
     }
 }
