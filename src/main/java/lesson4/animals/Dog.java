@@ -11,17 +11,17 @@ public class Dog extends Animal {
     @Override
     public void run(int distance) {
         if (distance > 0 && distance <= 500)
-            System.out.printf("%s бежит %d дистанции\n", name, distance);
+            System.out.printf("%s бежит %d дистанции\n", this.name, distance);
         else if (distance > 500)
-            System.out.printf("%s на такие дистанции не бегает\n", name);
+            System.out.printf("%s на такие дистанции не бегает\n", this.name);
     }
 
     @Override
     public void swim(int distance) {
         if (distance > 0 && distance <= 10)
-            System.out.printf("%s плывёт на %d дистанцию\n", name, distance);
+            System.out.printf("%s плывёт на %d дистанцию\n", this.name, distance);
         else if (distance > 10)
-            System.out.printf("%s на такие дистанции не плавает\n", name);
+            System.out.printf("%s на такие дистанции не плавает\n", this.name);
     }
 
     public static void printCountDogs() {

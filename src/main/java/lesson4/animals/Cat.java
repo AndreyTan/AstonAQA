@@ -13,28 +13,28 @@ public class Cat extends Animal {
     @Override
     public void run(int distance) {
         if (distance > 0 && distance <= 200)
-            System.out.printf("%s бежит %d дистанцию\n", name, distance);
+            System.out.printf("%s бежит %d дистанцию\n", this.name, distance);
         else if (distance > 200)
-            System.out.printf("%s на такие дистанции не бегает\n", name);
+            System.out.printf("%s на такие дистанции не бегает\n", this.name);
     }
 
     @Override
     public void swim(int distance) {
-        System.out.printf("%s не умеет плавать!\n", name);
+        System.out.printf("%s не умеет плавать!\n", this.name);
     }
 
     public void eatFood(FlatFood food) {
         if (food.tryToEat(1)) {
             this.hungry = true;
-            System.out.printf("%s поел\n", name);
+            System.out.printf("%s поел\n", this.name);
         } else {
             this.hungry = false;
-            System.out.printf("%s не поел\n", name);
+            System.out.printf("%s не поел\n", this.name);
         }
     }
 
     public void printHungryStatus() {
-        System.out.printf("%s статус сытости %b\n", name, this.hungry);
+        System.out.printf("%s статус сытости %b\n", this.name, this.hungry);
     }
 
     public static void printCountCats() {
