@@ -54,7 +54,7 @@ public class EchoTest {
 
 
         given()
-                .contentType(ContentType.URLENC)
+                //.contentType(ContentType.URLENC)
                 .accept(ContentType.ANY)
                 .body(bodyJson.toJSONString())
                 .log().body()
