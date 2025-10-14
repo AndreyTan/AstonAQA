@@ -1,6 +1,8 @@
 import static io.restassured.RestAssured.*;
+import static io.restassured.config.EncoderConfig.encoderConfig;
 import static org.hamcrest.Matchers.*;
 
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,10 +47,9 @@ public class EchoTest {
         req_body.put("foo1", "bar1");
         req_body.put("foo2", "bar2");
         req_body.put("foo3", "bar3");
-
+        RestAssured.config = RestAssured.config().encoderConfig(encoderConfig().defaultContentCharset("UTF-8"));
         given()
-                .contentType("application/x-www-form-urlencoded; charset=utf-8")
-                //.contentType(ContentType.URLENC)
+                .contentType(ContentType.URLENC)
                 .accept(ContentType.ANY)
                 .formParams(req_body)
                 .when()
