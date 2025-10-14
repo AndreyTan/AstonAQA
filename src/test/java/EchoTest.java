@@ -2,12 +2,8 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import org.json.simple.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,16 +15,12 @@ public class EchoTest {
     }
 
     @Test
-    public void testFirstGet() {
-        /*
-        Response response = get("https://postman-echo.com/get?foo1=bar1&foo2=bar2");
-        System.out.println(response.getStatusCode());
-        */
-
+    public void testGet() {
         given()
-                .get("/get?foo1=bar1&foo2=bar2").then().statusCode(200)
-                .body("args.foo1", equalTo("bar1"))
-                .and()
+                .get("/get?foo1=bar1&foo2=bar2")
+                .then()
+                .statusCode(200)
+                .body("args.foo1", equalTo("bar1")).and()
                 .body("args.foo2", equalTo("bar2"));
     }
 
@@ -48,25 +40,25 @@ public class EchoTest {
 
     @Test
     public void testPostForm() {
-        JSONObject bodyJson = new JSONObject();
-        bodyJson.put("foo1", "bar1");
-        bodyJson.put("foo2", "bar2");
+        Map<String,String> req_body = new HashMap<>();
 
+        req_body.put("foo1", "bar1");
+        req_body.put("foo2", "bar2");
+        req_body.put("foo3", "bar3");
 
         given()
+                .contentType("application/x-www-form-urlencoded; charset=utf-8")
                 //.contentType(ContentType.URLENC)
                 .accept(ContentType.ANY)
-                .body(bodyJson.toJSONString())
-                .log().body()
-                //.formParam("foo1", "bar1")
-                //.formParam("foo2", "bar2")
+                .formParams(req_body)
                 .when()
                 .post("/post")
                 .then()
                 .log().body()
-                .statusCode(200);
-                //.body("form.yolo", equalTo("yo1")).and()
-                //.body("form.bolo", equalTo("bobo"));
+                .statusCode(200)
+                .body("form.foo1", equalTo("bar1")).and()
+                .body("form.foo2", equalTo("bar2")).and()
+                .body("form.foo3", equalTo("bar3"));
     }
 
     @Test
