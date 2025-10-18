@@ -11,15 +11,15 @@ public class PayArrearsPage extends PagePayServices {
     }
 
     private WebElement getInputScore() {
-        return this._driver.findElement(By.xpath("//form[@id=\"pay-arrears\"]//input[@id=\"score-arrears\"]"));
+        return this.driver.findElement(By.xpath("//form[@id=\"pay-arrears\"]//input[@id=\"score-arrears\"]"));
     }
 
     private WebElement getInputSum() {
-        return this._driver.findElement(By.xpath("//form[@id=\"pay-arrears\"]//input[@id=\"arrears-sum\"]"));
+        return this.driver.findElement(By.xpath("//form[@id=\"pay-arrears\"]//input[@id=\"arrears-sum\"]"));
     }
 
     private WebElement getInputEmail() {
-        return this._driver.findElement(By.xpath("//form[@id=\"pay-arrears\"]//input[@id=\"arrears-email\"]"));
+        return this.driver.findElement(By.xpath("//form[@id=\"pay-arrears\"]//input[@id=\"arrears-email\"]"));
     }
 
     public void enterScore(String score) {

@@ -3,7 +3,9 @@ package lesson10.mtspages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
+import java.util.regex.Pattern;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class PayPhonePage extends PagePayServices {
@@ -13,15 +15,15 @@ public class PayPhonePage extends PagePayServices {
     }
 
     private WebElement getInputPhone() {
-        return this._driver.findElement(By.xpath("//form[@id=\"pay-connection\"]//input[@id=\"connection-phone\"]"));
+        return this.driver.findElement(By.xpath("//form[@id=\"pay-connection\"]//input[@id=\"connection-phone\"]"));
     }
 
     private WebElement getInputSum() {
-        return this._driver.findElement(By.xpath("//form[@id=\"pay-connection\"]//input[@id=\"connection-sum\"]"));
+        return this.driver.findElement(By.xpath("//form[@id=\"pay-connection\"]//input[@id=\"connection-sum\"]"));
     }
 
     private WebElement getInputEmail() {
-        return this._driver.findElement(By.xpath("//form[@id=\"pay-connection\"]//input[@id=\"connection-email\"]"));
+        return this.driver.findElement(By.xpath("//form[@id=\"pay-connection\"]//input[@id=\"connection-email\"]"));
     }
 
     public void enterPhone(String phone) {
@@ -43,24 +45,24 @@ public class PayPhonePage extends PagePayServices {
     }
 
     public boolean checkSum(double sum) {
-        String titleCost = this._driver.findElement(By.xpath("//div[@class=\"pay-description__cost\"]//span")).getAttribute("textContent");
-        String btnCost = this._driver.findElement(By.xpath(" //div[@class=\"card-page__card\"]//button[@type=\"submit\"]")).getAttribute("textContent");
+        String titleCost = this.driver.findElement(By.xpath("//div[@class=\"pay-description__cost ng-star-inserted\"]//span")).getAttribute("textContent");
+        String btnCost = this.driver.findElement(By.xpath("//div[@class=\"card-page__card\"]//button[@type=\"submit\"]")).getAttribute("textContent");
 
         return titleCost.matches(".*" + sum + ".*") && btnCost.matches(".*" + sum + ".*");
     }
 
     public boolean checkPhoneNumber(String phone) {
-        String phoneTitle = this._driver.findElement(By.xpath("//div[@class=\"pay-description__text\"]//span")).getAttribute("textContent");
+        String phoneTitle = this.driver.findElement(By.xpath("//div[@class=\"pay-description__text\"]//span")).getAttribute("textContent");
         phoneTitle = phoneTitle.replace('\n', ' ');
 
         return phoneTitle.matches(".*375" + phone + ".*");
     }
 
     public boolean checkPlaceholders() {
-        String phdCard = this._driver.findElement(By.xpath("//label[@class=\"ng-tns-c2312288139-1 ng-star-inserted\"]")).getAttribute("textContent");
-        String phdTime = this._driver.findElement(By.xpath("//label[@class=\"ng-tns-c2312288139-4 ng-star-inserted\"]")).getAttribute("textContent");
-        String phdCVC = this._driver.findElement(By.xpath("//label[@class=\"ng-tns-c2312288139-5 ng-star-inserted\"]")).getAttribute("textContent");
-        String phdName = this._driver.findElement(By.xpath("//label[@class=\"ng-tns-c2312288139-3 ng-star-inserted\"]")).getAttribute("textContent");
+        String phdCard = this.driver.findElement(By.xpath("//label[@class=\"ng-tns-c2312288139-3 ng-star-inserted\"]")).getAttribute("textContent");
+        String phdTime = this.driver.findElement(By.xpath("//label[@class=\"ng-tns-c2312288139-6 ng-star-inserted\"]")).getAttribute("textContent");
+        String phdCVC = this.driver.findElement(By.xpath("//label[@class=\"ng-tns-c2312288139-7 ng-star-inserted\"]")).getAttribute("textContent");
+        String phdName = this.driver.findElement(By.xpath("//label[@class=\"ng-tns-c2312288139-5 ng-star-inserted\"]")).getAttribute("textContent");
 
         return phdCard.matches(".*Номер карты.*") &&
                 phdTime.matches(".*Срок действия.*") &&
@@ -69,18 +71,48 @@ public class PayPhonePage extends PagePayServices {
 
     }
 
-    public int checkIcons() {
-        List<WebElement> icons = this._driver.findElements(By.xpath("//img[@class='ng-tns-c891095944-0 ng-star-inserted']"));
-        WebElement groupIcons = null;
+    public boolean checkIcons() {
+        HashSet<String> logos = new HashSet<>(5);
+        ArrayList<String> foundLogos = new ArrayList<>(5);
+        logos.add("visa");
+        logos.add("belkart");
+        logos.add("mastercard");
+        logos.add("maestro");
+        logos.add("mir");
 
-        try {
-            groupIcons = this._driver.findElement(By.xpath("//div[contains(@class,'cards-brands_random')]"));
-        } catch (Exception ex) {
-            //System.out.println(ex);
+        List<WebElement> icons = this.driver.findElements(By.xpath("//img[@class=\"ng-tns-c891095944-2 ng-star-inserted\"]"));
+        List<WebElement> groupIcons = this.driver.findElements(By.xpath("//div[contains(@class, 'cards-brands_random')]//img"));
+
+        for(WebElement elem : icons){
+            foundLogos.add(elem.getAttribute("src"));
+        }
+        for(WebElement elem : groupIcons){
+            foundLogos.add(elem.getAttribute("src"));
         }
 
+        for (String logo : logos) {
+            String patternLogo = ".*" + logo + ".*";
+            Pattern pattern = Pattern.compile(patternLogo);
+            boolean found = false;
 
-        return icons.size() + (groupIcons != null ? 1 : 0);
+            for(String foundLogo : foundLogos){
+                if (pattern.matcher(foundLogo).find()) {
+                    found = true;
+                }
+            }
+            if(!found)
+                return false;
+        }
+
+        return true;
+    }
+
+    public void fillForm(String phone, String sum,boolean needSwitch){
+        enterPhone(phone);
+        enterSum(sum);
+        clickContinue();
+        if(needSwitch)
+            driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@class=\"bepaid-iframe\"]")));
     }
 
 }

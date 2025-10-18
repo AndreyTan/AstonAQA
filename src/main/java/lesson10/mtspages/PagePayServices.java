@@ -5,24 +5,24 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public abstract class PagePayServices {
-    protected WebDriver _driver;
-    protected String _nameSelector;
+    protected WebDriver driver;
+    protected String nameSelector;
 
     public PagePayServices(WebDriver driver, String nameSelector) {
-        this._driver = driver;
-        this._nameSelector = nameSelector;
+        this.driver = driver;
+        this.nameSelector = nameSelector;
     }
 
     protected WebElement getBtnSelector() {
-        return this._driver.findElement(By.xpath("//div[@class=\"pay__form\"]//button[@class=\"select__header\"]"));
+        return this.driver.findElement(By.xpath("//div[@class=\"pay__form\"]//button[@class=\"select__header\"]"));
     }
 
     protected WebElement getBtnFromListSelector() {
-        return this._driver.findElement(By.xpath("//ul[@class=\"select__list\"]//p[text()=\"" + _nameSelector + "\"]"));
+        return this.driver.findElement(By.xpath("//ul[@class=\"select__list\"]//p[text()=\"" + this.nameSelector + "\"]"));
     }
 
     protected WebElement getBtnContinue() {
-        return this._driver.findElement(By.xpath("//form[@id=\"pay-connection\"]//button[@class=\"button button__default \"]"));
+        return this.driver.findElement(By.xpath("//form[@id=\"pay-connection\"]//button[@class=\"button button__default \"]"));
     }
 
     public void clickContinue() {
@@ -38,5 +38,4 @@ public abstract class PagePayServices {
         getBtnSelector().click();
         getBtnFromListSelector().click();
     }
-
 }

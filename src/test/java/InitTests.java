@@ -6,25 +6,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.time.Duration;
 
 public class InitTests {
-    private static WebDriver _driver;
 
-    public static WebDriver getDriver() {
-        if (_driver == null)
-            return new ChromeDriver();
-        return _driver;
-    }
-
-    public static void initSetUpTests() {
+    public static ChromeDriver getDriver() {
         WebDriverManager.chromedriver().setup();
-        _driver = new ChromeDriver();
-        _driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        openMTS();
+        return new ChromeDriver();
     }
 
-    public static void openMTS() {
-        _driver.get("https://mts.by/");
+    public static void openMTS(WebDriver driver) {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        driver.get("https://mts.by/");
         try {
-            _driver.findElement(By.xpath("//button[@class=\"btn btn_gray cookie__cancel\"]")).click();
+            driver.findElement(By.xpath("//button[@class=\"btn btn_gray cookie__cancel\"]")).click();
         } catch (Exception ex) {
             //System.out.println(ex);
         }

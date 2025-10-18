@@ -11,15 +11,15 @@ public class PayInstalmentPage extends PagePayServices {
     }
 
     private WebElement getInputScore() {
-        return this._driver.findElement(By.xpath("//form[@id=\"pay-instalment\"]//input[@id=\"score-instalment\"]"));
+        return this.driver.findElement(By.xpath("//form[@id=\"pay-instalment\"]//input[@id=\"score-instalment\"]"));
     }
 
     private WebElement getInputSum() {
-        return this._driver.findElement(By.xpath("//form[@id=\"pay-instalment\"]//input[@id=\"instalment-sum\"]"));
+        return this.driver.findElement(By.xpath("//form[@id=\"pay-instalment\"]//input[@id=\"instalment-sum\"]"));
     }
 
     private WebElement getInputEmail() {
-        return this._driver.findElement(By.xpath("//form[@id=\"pay-instalment\"]//input[@id=\"instalment-email\"]"));
+        return this.driver.findElement(By.xpath("//form[@id=\"pay-instalment\"]//input[@id=\"instalment-email\"]"));
     }
 
     public void enterScore(String score) {

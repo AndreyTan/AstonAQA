@@ -12,15 +12,15 @@ public class PayInternetPage extends PagePayServices {
     }
 
     private WebElement getInputInternetPhone() {
-        return this._driver.findElement(By.xpath("//form[@id=\"pay-internet\"]//input[@id=\"internet-phone\"]"));
+        return this.driver.findElement(By.xpath("//form[@id=\"pay-internet\"]//input[@id=\"internet-phone\"]"));
     }
 
     private WebElement getInputInternetSum() {
-        return this._driver.findElement(By.xpath("//form[@id=\"pay-internet\"]//input[@id=\"internet-sum\"]"));
+        return this.driver.findElement(By.xpath("//form[@id=\"pay-internet\"]//input[@id=\"internet-sum\"]"));
     }
 
     private WebElement getInputInternetEmail() {
-        return this._driver.findElement(By.xpath("//form[@id=\"pay-internet\"]//input[@id=\"internet-email\"]"));
+        return this.driver.findElement(By.xpath("//form[@id=\"pay-internet\"]//input[@id=\"internet-email\"]"));
     }
 
     public void enterInternetPhone(String phone) {

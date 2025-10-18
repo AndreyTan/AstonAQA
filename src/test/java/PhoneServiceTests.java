@@ -1,60 +1,62 @@
 import lesson10.mtspages.PayFormPage;
 import lesson10.mtspages.PayPhonePage;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Тестируем сервис оплаты телефона")
 public class PhoneServiceTests {
-    private static PayPhonePage _page;
-    private static String _phone;
-    private static String _sum;
+    private static PayPhonePage page;
+    private static String phone;
+    private static String sum;
+    private static WebDriver driver;
 
     @BeforeAll
     public static void setUpSuite() {
-        InitTests.initSetUpTests();
-        _page = new PayPhonePage(InitTests.getDriver());
-        _phone = "297777777";
-        _sum = "53";
-        _page.openPage();
-        _page.enterPhone(_phone);
-        _page.enterSum(_sum);
-        _page.clickContinue();
+        phone = "297777777";
+        sum = "53";
+    }
 
-        InitTests.getDriver().switchTo().frame(InitTests.getDriver().findElement(By.xpath("//iframe[@class=\"bepaid-iframe\"]")));
+    @BeforeEach
+    public void setUpTest() {
+        driver = InitTests.getDriver();
+        InitTests.openMTS(driver);
+        //this.payFormPage = new PayFormPage(driver);
+        page = new PayPhonePage(driver);
+        page.openPage();
+        page.fillForm(phone,sum,true);
+    }
+
+    @AfterEach
+    void testDownEach(){
+        driver.quit();
     }
 
     @Test
     @DisplayName("проверяем телефон")
     public void testPhone() {
-        assertTrue(_page.checkPhoneNumber(_phone), "телефон должен отображаться правильно");
+        assertTrue(page.checkPhoneNumber(phone), "телефон должен отображаться правильно");
     }
 
     @Test
     @DisplayName("проверяем сумму в заголовке и кнопке")
     public void testSum() {
-        assertTrue(_page.checkSum(Integer.parseInt(_sum)), "сумма должна отображаться правильно");
+        assertTrue(page.checkSum(Integer.parseInt(sum)), "сумма должна отображаться правильно");
     }
 
     @Test
     @DisplayName("проверяем плейсхолдеры")
     public void testPhd() {
-        assertTrue(_page.checkPlaceholders(), "плейсхолдеры неправильные");
+        assertTrue(page.checkPlaceholders(), "плейсхолдеры неправильные");
     }
 
     @Test
     @DisplayName("проверяем иконки")
     public void testIcons() {
-        assertEquals(4, _page.checkIcons());
+        assertTrue(page.checkIcons());
     }
 
-    @AfterAll
-    public static void finishTest() {
-        InitTests.getDriver().switchTo().defaultContent();
-        InitTests.getDriver().quit();
-    }
+
 }
