@@ -10,33 +10,35 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.HashSet;
 import java.util.List;
 
 @DisplayName("Тестируем блок пополнения мтс")
 public class MTSTest {
-    private static WebDriver driver;
+    private WebDriver driver;
 
     @BeforeAll
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
+    }
+
+    @BeforeEach
+    void setupTest(){
         driver = new ChromeDriver();
         driver.get("https://mts.by/");
         try {
             driver.findElement(By.xpath("//button[@class=\"btn btn_gray cookie__cancel\"]")).click();
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+        } catch (Exception ex) {}
     }
 
-    @AfterAll
-    public static void tearDown() {
+    @AfterEach
+    void testDownEach(){
         driver.quit();
     }
 
     @Test
     @DisplayName("проверяем название блока")
     void testPayWrapper() {
-
         String h2PayWrapper = driver.findElement(By.xpath("//div[@class=\"pay__wrapper\"]/h2")).getText();
         h2PayWrapper = h2PayWrapper.replace('\n', ' ');
 
@@ -46,10 +48,17 @@ public class MTSTest {
     @Test
     @DisplayName("проверяем наличие логотипов")
     public void testLogos() {
+        HashSet<String> logos = new HashSet<>(5);
+        logos.add("Visa");
+        logos.add("Verified By Visa");
+        logos.add("MasterCard");
+        logos.add("MasterCard Secure Code");
+        logos.add("Белкарт");
 
         List<WebElement> elems = driver.findElements(By.xpath("//div[@class=\"pay__partners\"]//li/img"));
-
-        assertEquals(5, elems.size());
+        for(WebElement elem : elems){
+            assertTrue(logos.contains(elem.getAttribute("alt")));
+        }
     }
 
     @Test
@@ -70,7 +79,6 @@ public class MTSTest {
     @Test
     @DisplayName("тестируем кнопку продолжить")
     public void testForm() {
-
         WebElement inputPhone = driver.findElement(By.xpath("//form[@id=\"pay-connection\"]//input[@id=\"connection-phone\"]"));
         WebElement inputSum = driver.findElement(By.xpath("//form[@id=\"pay-connection\"]//input[@id=\"connection-sum\"]"));
         WebElement btnContinue = driver.findElement(By.xpath("//form[@id=\"pay-connection\"]//button[@class=\"button button__default \"]"));
@@ -80,5 +88,7 @@ public class MTSTest {
         inputSum.click();
         inputSum.sendKeys("33");
         btnContinue.click();
+
+        //iframe[@class='bepaid-iframe']
     }
 }
